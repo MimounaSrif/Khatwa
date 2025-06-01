@@ -22,20 +22,20 @@ export default function Register() {
     try {
       await axios.post('http://127.0.0.1:8000/api/register', form);
       navigate('/login');
-    } catch (error) {
-      console.error('Erreur inscription:', error.response?.data || error.message);
+    } catch (err) {
+      console.error('Erreur d’inscription:', err.response?.data || err);
     }
   };
 
   return (
     <div>
-      <h2>Inscription</h2>
-      {['nom', 'prenom', 'age', 'pays', 'email', 'password'].map((field) => (
+      <h1>Inscription</h1>
+      {Object.keys(form).map((field) => (
         <div key={field}>
           <input
+            name={field}
             type={field === 'password' ? 'password' : 'text'}
             placeholder={field}
-            name={field}
             value={form[field]}
             onChange={handleChange}
           />
